@@ -10,7 +10,7 @@ app.use(function(req, res, next) {
 });
 
 
-var addNewEntry = (token) => {
+var addNewEntry = (token, context) => {
   console.log("new entry called")
   var post_url = "http://74.95.35.226:6060/MaximizerWebData/Data.svc/json/AbEntryCreate"
   var createRequest = {
@@ -32,11 +32,10 @@ var addNewEntry = (token) => {
 
   axios.post(post_url, JSON.stringify(createRequest))
   .then(function (response, err) {
-    res.send("yeah man it worked")
+    context.send("success!")
   })
   .catch((err) => {
-    console.log("ERROR", err.data)
-    res.send("server error")
+    context.send("server error")
   })
 }
 
@@ -52,8 +51,7 @@ app.get('*', function (req, res) {
   .then(function (response, err) {
     if(response.data["Code"] === 0) {
       var token = response.data["Data"]["Token"]
-      addNewEntry(token)
-      //res.send(token)
+      addNewEntry(token, res)
     } else {
       res.send("invalid credentials")
     }
