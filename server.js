@@ -11,20 +11,22 @@ app.use(function(req, res, next) {
 
 
 var addNewEntry = (token, context) => {
-  console.log("new entry called")
   var post_url = "http://74.95.35.226:6060/MaximizerWebData/Data.svc/json/AbEntryCreate"
   var createRequest = {
     Token: token,
-    AbEntry: {
-      Data: {
+    "AbEntry": {
+      "Data": {
         "Key": null,
         "Type": "Individual",
-        "LastName": "Somogyi",
-        "FirstName": "Peter YO",
-        "Email": "petersomogyi@maximizer.com",
-        "Phone": "604-601-8071",
+        "LastName": "Preston",
+        "FirstName": "Isaac",
+        "Email": "isaac@verbalplusvisual.com",
+        "Phone": "267-243-6875",
         "Udf/$NAME(Leads\\GetNewsletter)": [
-        "2"
+          "2"
+        ],
+        "Udf/$NAME(Sales\\Lead status)": [
+          "57998"
         ]
       }
     }
@@ -32,6 +34,7 @@ var addNewEntry = (token, context) => {
 
   axios.post(post_url, JSON.stringify(createRequest))
   .then(function (response, err) {
+    console.log(response.data)
     context.send("success!")
   })
   .catch((err) => {
