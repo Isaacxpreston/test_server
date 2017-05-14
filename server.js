@@ -51,24 +51,25 @@ app.get('*', function (req, res) {
 app.post('*', function (req, res) {
 
   console.log("requested with", req.body)
+  res.send("you sent", req.body)
 
-  var authRequest = {"Database": "Tufenkian2007","UID": "ISAAC","Password": "verbalplusvisual2"}
+  // var authRequest = {"Database": "Tufenkian2007","UID": "ISAAC","Password": "verbalplusvisual2"}
 
-  var auth_url = "http://74.95.35.226:6060/MaximizerWebData/Data.svc/json/Authenticate"
+  // var auth_url = "http://74.95.35.226:6060/MaximizerWebData/Data.svc/json/Authenticate"
 
-  axios.post(auth_url, JSON.stringify(authRequest))
-  .then(function (response, err) {
-    if(response.data["Code"] === 0) {
-      var token = response.data["Data"]["Token"]
-      addNewEntry(token, res)
-    } else {
-      res.send("invalid credentials")
-    }
-  })
-  .catch((err) => {
-    console.log("ERROR", err.data)
-    res.send("server error")
-  })
+  // axios.post(auth_url, JSON.stringify(authRequest))
+  // .then(function (response, err) {
+  //   if(response.data["Code"] === 0) {
+  //     var token = response.data["Data"]["Token"]
+  //     addNewEntry(token, res)
+  //   } else {
+  //     res.send("invalid credentials")
+  //   }
+  // })
+  // .catch((err) => {
+  //   console.log("ERROR", err.data)
+  //   res.send("server error")
+  // })
   
 })
 
