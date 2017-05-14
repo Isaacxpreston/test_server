@@ -1,7 +1,10 @@
 var express = require('express')
+var bodyParser = require('body-parser')
 var axios = require('axios')
 var app = express()
 var port = process.env.PORT || 3000
+
+app.use(bodyParser.json())
 
 app.use(function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
@@ -41,11 +44,14 @@ var addNewEntry = (token, context) => {
     context.send("server error")
   })
 }
-
-
 app.get('*', function (req, res) {
+  res.send('Server running on port ' + port)
+})
 
-  //construct the request
+app.post('*', function (req, res) {
+
+  console.log("requested with", req.body)
+
   var authRequest = {"Database": "Tufenkian2007","UID": "ISAAC","Password": "verbalplusvisual2"}
 
   var auth_url = "http://74.95.35.226:6060/MaximizerWebData/Data.svc/json/Authenticate"
