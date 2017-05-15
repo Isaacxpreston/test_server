@@ -38,7 +38,7 @@ var addNewEntry = (token, context, requestObject) => {
         "Udf/$NAME(Leads\\CallMe)": ["2"],
         "Lead": true,
         "Udf/$NAME(Leads\\Contact Invoicing)": requestObject["ContactInvoicing"],
-        "Udf/$NAME(Leads\\Contact Receiving)": requestObject["ContactInvoicing"],
+        "Udf/$NAME(Leads\\Contact Receiving)": requestObject["ContactReceiving"],
         "Udf/$NAME(Leads\\Instagram)": requestObject["SocialMedia"],
         "Udf/$NAME(Leads\\Type Entity)": requestObject["TypeEntity"],
         "Udf/$NAME(Leads\\State of Resale Lic)": requestObject["StateResale"],
@@ -48,6 +48,9 @@ var addNewEntry = (token, context, requestObject) => {
         "Udf/$NAME(Leads\\Showroom)": requestObject["Showroom"],
         "Udf/$NAME(Leads\\MarketingChannel)": requestObject["MarketingChannel"], 
         "AccountManager": requestObject["SalesRep"],
+        "Udf/$NAME(Leads\\SearchTerm)": requestObject["SearchTerm"],
+        "Udf/$NAME(Leads\\ProductURL)": requestObject["ProductURL"],
+        "Udf/$NAME(Leads\\ProductID)": requestObject["ProductID"]
       }
     }
   }
