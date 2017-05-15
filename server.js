@@ -25,7 +25,6 @@ var addNewEntry = (token, context, requestObject) => {
         "FirstName": requestObject["FirstName"],
         "Email": requestObject["Email"],
         "Phone": requestObject["Phone"],
-        // "Website": "requestObject["Website"],"
         "Address": {
           "AddressLine1": requestObject["AddressLine1"],
           "AddressLine2": requestObject["AddressLine2"],
@@ -36,7 +35,19 @@ var addNewEntry = (token, context, requestObject) => {
         "Udf/$NAME(Leads\\GetNewsletter)": [
           "2"
         ],
-        "Lead": true
+        "Udf/$NAME(Leads\\CallMe)": ["2"],
+        "Lead": true,
+        "Udf/$NAME(Leads\\Contact Invoicing)": requestObject["ContactInvoicing"],
+        "Udf/$NAME(Leads\\Contact Receiving)": requestObject["ContactInvoicing"],
+        "Udf/$NAME(Leads\\Instagram)": requestObject["SocialMedia"],
+        "Udf/$NAME(Leads\\Type Entity)": requestObject["TypeEntity"],
+        "Udf/$NAME(Leads\\State of Resale Lic)": requestObject["StateResale"],
+        "Udf/$NAME(Leads\\Resale Tax Number)": requestObject["ResaleTax"],
+        "Udf/$NAME(Leads\\Years In Business)": requestObject["YearsBusiness"],
+        "Udf/$NAME(Leads\\Affiliations)": requestObject["Affiliations"],
+        "Udf/$NAME(Leads\\Showroom)": requestObject["Showroom"],
+        "Udf/$NAME(Leads\\MarketingChannel)": requestObject["MarketingChannel"], 
+        "AccountManager": requestObject["SalesRep"],
       }
     }
   }
