@@ -25,6 +25,7 @@ var addNewEntry = (token, context, requestObject) => {
         "FirstName": requestObject["FirstName"],
         "Email": requestObject["Email"],
         "Phone": requestObject["Phone"],
+        // "Website": "requestObject["Website"],"
         "Address": {
           "AddressLine1": requestObject["AddressLine1"],
           "AddressLine2": requestObject["AddressLine2"],
@@ -35,8 +36,7 @@ var addNewEntry = (token, context, requestObject) => {
         "Udf/$NAME(Leads\\GetNewsletter)": [
           "2"
         ],
-        "Lead": true,
-        "Website": requestObject["Website"]
+        "Lead": true
       }
     }
   }
