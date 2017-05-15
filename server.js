@@ -13,6 +13,7 @@ app.use(function(req, res, next) {
 });
 
 var addNewEntry = (token, context, requestObject) => {
+  console.log(requestObject)
   var post_url = "http://74.95.35.226:6060/MaximizerWebData/Data.svc/json/AbEntryCreate"
   var createRequest = {
     Token: token,
@@ -36,21 +37,21 @@ var addNewEntry = (token, context, requestObject) => {
           "2"
         ],
         "Udf/$NAME(Leads\\CallMe)": ["2"],
-        "Lead": true,
-        "Udf/$NAME(Leads\\Contact Invoicing)": "TESTING",//requestObject["ContactInvoicing"],
-        "Udf/$NAME(Leads\\Contact Receiving)": "TESTING",//requestObject["ContactReceiving"],
-        "Udf/$NAME(Leads\\Instagram)": "TESTING",//requestObject["SocialMedia"],
-        "Udf/$NAME(Leads\\Type Entity)": "TESTING",//requestObject["TypeEntity"],
-        "Udf/$NAME(Leads\\State of Resale Lic)": "TESTING",//requestObject["StateResale"],
-        "Udf/$NAME(Leads\\Resale Tax Number)": "TESTING",//requestObject["ResaleTax"],
-        "Udf/$NAME(Leads\\Years In Business)": "TESTING",//requestObject["YearsBusiness"],
-        "Udf/$NAME(Leads\\Affiliations)": "TESTING",//requestObject["Affiliations"],
-        "Udf/$NAME(Leads\\Showroom)": "TESTING",//requestObject["Showroom"],
-        "Udf/$NAME(Leads\\MarketingChannel)": "TESTING",//requestObject["MarketingChannel"], 
-        "AccountManager": "TESTING",//requestObject["SalesRep"],
-        "Udf/$NAME(Leads\\SearchTerm)": "TESTING",//requestObject["SearchTerm"],
-        "Udf/$NAME(Leads\\ProductURL)": "TESTING",//requestObject["ProductURL"],
-        "Udf/$NAME(Leads\\ProductID)": "TESTING",//requestObject["ProductID"]
+        "Udf/$NAME(Leads\\Contact Invoicing)": requestObject["ContactInvoicing"],
+        "Udf/$NAME(Leads\\Contact Receiving)": requestObject["ContactReceiving"],
+        "Udf/$NAME(Leads\\Instagram)": requestObject["SocialMedia"],
+        "Udf/$NAME(Leads\\Type Entity)": requestObject["TypeEntity"],
+        "Udf/$NAME(Leads\\State of Resale Lic)": requestObject["StateResale"],
+        "Udf/$NAME(Leads\\Resale Tax Number)": requestObject["ResaleTax"],
+        "Udf/$NAME(Leads\\Years In Business)": requestObject["YearsBusiness"],
+        "Udf/$NAME(Leads\\Affiliations)": requestObject["Affiliations"],
+        "Udf/$NAME(Leads\\Showroom)": requestObject["Showroom"],
+        "Udf/$NAME(Leads\\MarketingChannel)": requestObject["MarketingChannel"], 
+        "AccountManager": requestObject["SalesRep"],
+        "Udf/$NAME(Leads\\SearchTerm)": requestObject["SearchTerm"],
+        "Udf/$NAME(Leads\\ProductURL)": requestObject["ProductURL"],
+        "Udf/$NAME(Leads\\ProductID)": requestObject["ProductID"],
+        "Lead": true
       }
     }
   }
@@ -82,7 +83,20 @@ app.post('*', function (req, res) {
     "City": req.body["City"],
     "StateProvince": req.body["StateProvince"],
     "CompanyName": req.body["CompanyName"],
-    "Website": req.body["Website"]
+    "ContactInvoicing": req.body["ContactInvoicing"],
+    "ContactReceiving": req.body["ContactReceiving"],
+    "SocialMedia": req.body["SocialMedia"],
+    "TypeEntity": req.body["TypeEntity"],
+    "StateResale": req.body["StateResale"],
+    "ResaleTax": req.body["ResaleTax"],
+    "YearsBusiness": req.body["YearsBusiness"],
+    "Affiliations": req.body["Affiliations"],
+    "Showroom": req.body["Showroom"],
+    "MarketingChannel": req.body["Website"],
+    "SalesRep": req.body["SalesRep"],
+    "SearchTerm": req.body["SearchTerm"],
+    "ProductURL": req.body["ProductURL"],
+    "ProductID": req.body["ProductID"]
   }
   var auth_url = "http://74.95.35.226:6060/MaximizerWebData/Data.svc/json/Authenticate"
 
