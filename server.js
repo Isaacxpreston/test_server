@@ -24,7 +24,6 @@ var addNewEntry = (token, context, requestObject) => {
         "FirstName": requestObject["FirstName"],
         "Email": requestObject["Email"],
         "Phone": requestObject["Phone"],
-        "Zip": "19103",
         "Udf/$NAME(Leads\\GetNewsletter)": [
           "2"
         ]
