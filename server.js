@@ -35,9 +35,10 @@ var addNewEntry = (token, context, requestObject) => {
   }
   axios.post(post_url, JSON.stringify(createRequest))
   .then(function (response, err) {
-    context.send("success: " + requestObject["FirstName"] + " " + requestObject["LastName"] + " " + request["Email"] + " " + request["Phone"] + " " + response.data["Code"])
+    context.send("success: " + requestObject["FirstName"] + " " + requestObject["LastName"] + " " + requestObject["Email"] + " " + requestObject["Phone"] + " " + response.data["Code"])
   })
   .catch((err) => {
+    console.log("POST ERROR", err)
     context.send("server error")
   })
 }
