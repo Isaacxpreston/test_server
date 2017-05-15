@@ -36,7 +36,7 @@ var addNewEntry = (token, context, request) => {
 
   axios.post(post_url, JSON.stringify(createRequest))
   .then(function (response, err) {
-    context.send("success!")
+    context.send("success: " + requesr.FirstName + " " + request.LastName + " " + request.Email + " " + request.Phone)
   })
   .catch((err) => {
     context.send("server error")
@@ -76,10 +76,3 @@ app.post('*', function (req, res) {
 app.listen(port, function () {
   console.log("running on " + port)
 })
-
-// {
-// 	"FirstName": "Isaac",
-// 	"LastName": "Preston",
-// 	"Email": "isaac@verbalplusvisual.com",
-// 	"Phone": "267-243-6875"
-// }
