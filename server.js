@@ -35,7 +35,8 @@ var addNewEntry = (token, context, requestObject) => {
         "Udf/$NAME(Leads\\GetNewsletter)": [
           "2"
         ],
-        "Lead": true
+        "Lead": true,
+        "Website": requestObject["Website"]
       }
     }
   }
@@ -66,7 +67,8 @@ app.post('*', function (req, res) {
     "ZipCode": req.body["ZipCode"],
     "City": req.body["City"],
     "StateProvince": req.body["StateProvince"],
-    "CompanyName": req.body["CompanyName"]
+    "CompanyName": req.body["CompanyName"],
+    "Website": req.body["Website"]
   }
   var auth_url = "http://74.95.35.226:6060/MaximizerWebData/Data.svc/json/Authenticate"
 
