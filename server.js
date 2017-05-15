@@ -12,7 +12,7 @@ app.use(function(req, res, next) {
   next();
 });
 
-var addNewEntry = (token, context, request) => {
+var addNewEntry = (token, context, requestObject) => {
   var post_url = "http://74.95.35.226:6060/MaximizerWebData/Data.svc/json/AbEntryCreate"
   var createRequest = {
     Token: token,
@@ -20,10 +20,10 @@ var addNewEntry = (token, context, request) => {
       "Data": {
         "Key": null,
         "Type": "Individual",
-        "LastName": request.LastName,
-        "FirstName": request.FirstName,
-        "Email": request.Email,
-        "Phone": request.Phone,
+        "LastName": requestObject["LastName"],
+        "FirstName": requestObject["FirstName"],
+        "Email": requestObject["Email"],
+        "Phone": requestObject["Phone"],
         "Udf/$NAME(Leads\\GetNewsletter)": [
           "2"
         ]
@@ -33,10 +33,9 @@ var addNewEntry = (token, context, request) => {
       }
     }
   }
-
   axios.post(post_url, JSON.stringify(createRequest))
   .then(function (response, err) {
-    context.send("success: " + request.FirstName + " " + request.LastName + " " + request.Email + " " + request.Phone)
+    context.send("success: " + requestObject["FirstName"] + " " + requestObject["LastName"] + " " + request["Email"] + " " + request["Phone"] + " " + response.data["Code"])
   })
   .catch((err) => {
     context.send("server error")
@@ -51,10 +50,10 @@ app.get('*', function (req, res) {
 app.post('*', function (req, res) {
   var authRequest = {"Database": "Tufenkian2007","UID": "ISAAC","Password": "verbalplusvisual2"}
   var requestObject = {
-    "FirstName": req.body.FirstName,
-    "LastName": req.body.LastName,
-    "Email": req.body.Email,
-    "Phone": req.body.Phone
+    "FirstName": req.body["FirstName"],
+    "LastName": req.body["LastName"],
+    "Email": req.body["Email"],
+    "Phone": req.body["Phone"]
   }
   var auth_url = "http://74.95.35.226:6060/MaximizerWebData/Data.svc/json/Authenticate"
 
