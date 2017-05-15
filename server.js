@@ -24,18 +24,23 @@ var addNewEntry = (token, context, requestObject) => {
         "FirstName": requestObject["FirstName"],
         "Email": requestObject["Email"],
         "Phone": requestObject["Phone"],
+        "Address": {
+          "AddressLine1": requestObject["AddressLine1"],
+          "AddressLine2": requestObject["AddressLine2"],
+          "ZipCode": requestObject["ZipCode"],
+          "City": requestObject["City"],
+          "StateProvince": requestObject["StateProvince"]
+        },
         "Udf/$NAME(Leads\\GetNewsletter)": [
           "2"
-        ]
-        // "Udf/$NAME(Sales\\Lead status)": [
-        //   "57998"
-        // ]
+        ],
+        "Lead": true
       }
     }
   }
   axios.post(post_url, JSON.stringify(createRequest))
   .then(function (response, err) {
-    context.send("success: " + requestObject["FirstName"] + " " + requestObject["LastName"] + " " + requestObject["Email"] + " " + requestObject["Phone"] + " " + response.data["Code"])
+    context.send(response.data)
   })
   .catch((err) => {
     console.log("POST ERROR", err)
@@ -54,7 +59,12 @@ app.post('*', function (req, res) {
     "FirstName": req.body["FirstName"],
     "LastName": req.body["LastName"],
     "Email": req.body["Email"],
-    "Phone": req.body["Phone"]
+    "Phone": req.body["Phone"],
+    "AddressLine1": req.body["AddressLine1"],
+    "AddressLine2": req.body["AddressLine2"],
+    "ZipCode": req.body["ZipCode"],
+    "City": req.body["City"],
+    "StateProvince": req.body["StateProvince"]
   }
   var auth_url = "http://74.95.35.226:6060/MaximizerWebData/Data.svc/json/Authenticate"
 
