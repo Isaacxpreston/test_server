@@ -20,6 +20,7 @@ var addNewEntry = (token, context, requestObject) => {
       "Data": {
         "Key": null,
         "Type": "Individual",
+        "CompanyName": requestObject["CompanyName"],
         "LastName": requestObject["LastName"],
         "FirstName": requestObject["FirstName"],
         "Email": requestObject["Email"],
@@ -64,7 +65,8 @@ app.post('*', function (req, res) {
     "AddressLine2": req.body["AddressLine2"],
     "ZipCode": req.body["ZipCode"],
     "City": req.body["City"],
-    "StateProvince": req.body["StateProvince"]
+    "StateProvince": req.body["StateProvince"],
+    "CompanyName": req.body["CompanyName"]
   }
   var auth_url = "http://74.95.35.226:6060/MaximizerWebData/Data.svc/json/Authenticate"
 
