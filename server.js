@@ -95,7 +95,7 @@ app.post('*', function (req, res) {
     "Affiliations": req.body["Affiliations"],
     "Showroom": req.body["Showroom"],
     "MarketingChannel": req.body["Website"],
-    "SalesRep": req.body["SalesRep"],
+    "SalesRep": req.body["SalesRep"] || "No sales rep provided",
     "SearchTerm": req.body["SearchTerm"],
     "ProductURL": req.body["ProductURL"],
     "ProductID": req.body["ProductID"]
