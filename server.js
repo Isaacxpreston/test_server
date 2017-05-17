@@ -73,6 +73,10 @@ app.get('*', function (req, res) {
 })
 
 app.post('*', function (req, res) {
+  var salesRep = req.body["SalesRep"]
+  if(req.body["SalesRep"].length > 29) {
+    salesRep = "No sales rep selected"
+  }
   var authRequest = {"Database": "Tufenkian2007","UID": "ISAAC","Password": "verbalplusvisual2"}
   var requestObject = {
     "FirstName": req.body["FirstName"],
@@ -95,7 +99,7 @@ app.post('*', function (req, res) {
     "Affiliations": req.body["Affiliations"],
     "Showroom": req.body["Showroom"],
     "MarketingChannel": req.body["Website"],
-    "SalesRep": "TESTINGSALES", //req.body["SalesRep"],
+    "SalesRep": salesRep,
     "SearchTerm": req.body["SearchTerm"],
     "ProductURL": req.body["ProductURL"],
     "ProductID": req.body["ProductID"]
