@@ -58,6 +58,7 @@ var addNewEntry = (token, context, requestObject) => {
   }
   axios.post(post_url, JSON.stringify(createRequest))
   .then(function (response, err) {
+    console.log("POST SUCCESS", response.data)
     context.send(response.data)
   })
   .catch((err) => {
