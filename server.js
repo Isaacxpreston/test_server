@@ -95,11 +95,12 @@ app.post('*', function (req, res) {
     "Affiliations": req.body["Affiliations"],
     "Showroom": req.body["Showroom"],
     "MarketingChannel": req.body["Website"],
-    "SalesRep": req.body["SalesRep"] || "No sales rep provided",
+    "SalesRep": "TESTINGSALES", //req.body["SalesRep"],
     "SearchTerm": req.body["SearchTerm"],
     "ProductURL": req.body["ProductURL"],
     "ProductID": req.body["ProductID"]
   }
+  console.log(req.body["SalesRep"], req.body["SalesRep"].length)
   var auth_url = "http://74.95.35.226:6060/MaximizerWebData/Data.svc/json/Authenticate"
 
   axios.post(auth_url, JSON.stringify(authRequest))
