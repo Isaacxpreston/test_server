@@ -104,7 +104,6 @@ app.post('*', function (req, res) {
     "ProductURL": req.body["ProductURL"],
     "ProductID": req.body["ProductID"]
   }
-  console.log(req.body["SalesRep"], req.body["SalesRep"].length)
   var auth_url = "http://74.95.35.226:6060/MaximizerWebData/Data.svc/json/Authenticate"
 
   axios.post(auth_url, JSON.stringify(authRequest))
