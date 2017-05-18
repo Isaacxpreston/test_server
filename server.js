@@ -73,7 +73,7 @@ app.get('*', function (req, res) {
 })
 
 app.post('*', function (req, res) {
-  var salesRep = req.body["SalesRep"]
+  var salesRep = req.body["SalesRep"] || "No sales rep selected"
   if(req.body["SalesRep"].length > 29) {
     salesRep = "No sales rep selected"
   }
