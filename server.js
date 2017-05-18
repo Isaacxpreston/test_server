@@ -74,7 +74,7 @@ app.get('*', function (req, res) {
 
 app.post('*', function (req, res) {
   var salesRep = req.body["SalesRep"] || "No sales rep selected"
-  if(req.body["SalesRep"].length > 29) {
+  if(salesRep.length > 29) {
     salesRep = "No sales rep selected"
   }
   var authRequest = {"Database": "Tufenkian2007","UID": "ISAAC","Password": "verbalplusvisual2"}
