@@ -21,37 +21,36 @@ var addNewEntry = (token, context, requestObject) => {
       "Data": {
         "Key": null,
         "Type": "Individual",
-        "CompanyName": requestObject["CompanyName"],
-        "LastName": requestObject["LastName"],
-        "FirstName": requestObject["FirstName"],
-        "Email": requestObject["Email"],
-        "Phone": requestObject["Phone"],
+        "CompanyName": requestObject["CompanyName"] ? requestObject["CompanyName"].slice(0, 79) : "",
+        "LastName": requestObject["LastName"] ? requestObject["LastName"].slice(0, 79) : "",
+        "FirstName": requestObject["FirstName"] ? requestObject["FirstName"].slice(0, 79) :  "",
+        "Email": requestObject["Email"] ? requestObject["Email"].slice(0, 255) : "",
+        "Phone": requestObject["Phone"] ? requestObject["Phone"].slice(0, 21) : "",
         "Address": {
-          "AddressLine1": requestObject["AddressLine1"],
-          "AddressLine2": requestObject["AddressLine2"],
-          "ZipCode": requestObject["ZipCode"],
-          "City": requestObject["City"],
-          "StateProvince": requestObject["StateProvince"]
+          "AddressLine1": requestObject["AddressLine1"] ? requestObject["AddressLine1"].slice(0, 79) : "",
+          "AddressLine2": requestObject["AddressLine2"] ? requestObject["AddressLine2"].slice(0, 79) : "",
+          "ZipCode": requestObject["ZipCode"] ? requestObject["ZipCode"].slice(0, 79) : "",
+          "City": requestObject["City"] ? requestObject["City"].slice(0, 79) : "",
+          "StateProvince": requestObject["StateProvince"] ? requestObject["StateProvince"].slice(0, 79) : ""
         },
         "Udf/$NAME(Leads\\GetNewsletter)": [
           "2"
         ],
         "Udf/$NAME(Leads\\CallMe)": ["2"],
-        "Udf/$NAME(Leads\\Contact Invoicing)": requestObject["ContactInvoicing"],
-        "Udf/$NAME(Leads\\Contact Receiving)": requestObject["ContactReceiving"],
-        "Udf/$NAME(Leads\\Instagram)": requestObject["SocialMedia"],
-        "Udf/$NAME(Leads\\Type Entity)": requestObject["TypeEntity"],
-        "Udf/$NAME(Leads\\State of Resale Lic)": requestObject["StateResale"],
-        "Udf/$NAME(Leads\\Resale Tax Number)": requestObject["ResaleTax"],
-        "Udf/$NAME(Leads\\Years In Business)": requestObject["YearsBusiness"],
-        "Udf/$NAME(Leads\\Affiliations)": requestObject["Affiliations"],
-        "Udf/$NAME(Leads\\Showroom)": requestObject["Showroom"],
-        "Udf/$NAME(Leads\\MarketingChannel)": requestObject["MarketingChannel"], 
-        // "AccountManager": requestObject["SalesRep"],
-        "Udf/$NAME(Leads\\Sales Person)": requestObject["SalesRep"],
-        "Udf/$NAME(Leads\\SearchTerm)": requestObject["SearchTerm"],
-        "Udf/$NAME(Leads\\ProductURL)": requestObject["ProductURL"],
-        "Udf/$NAME(Leads\\ProductID)": requestObject["ProductID"],
+        "Udf/$NAME(Leads\\Contact Invoicing)": requestObject["ContactInvoicing"] ? requestObject["ContactInvoicing"].slice(0, 29) : "",
+        "Udf/$NAME(Leads\\Contact Receiving)": requestObject["ContactReceiving"] ? requestObject["ContactReceiving"].slice(0, 29) : "",
+        "Udf/$NAME(Leads\\Instagram)": requestObject["SocialMedia"] ? requestObject["SocialMedia"].slice(0, 90) : "",
+        "Udf/$NAME(Leads\\Type Entity)": requestObject["TypeEntity"] ? requestObject["TypeEntity"].slice(0, 59) : "",
+        "Udf/$NAME(Leads\\State of Resale Lic)": requestObject["StateResale"] ? requestObject["StateResale"].slice(0, 29) : "",
+        "Udf/$NAME(Leads\\Resale Tax Number)": requestObject["ResaleTax"] ? requestObject["ResaleTax"].slice(0, 29) : "",
+        "Udf/$NAME(Leads\\Years In Business)": requestObject["YearsBusiness"] ? requestObject["YearsBusiness"].slice(0, 29) : "",
+        "Udf/$NAME(Leads\\Affiliations)": requestObject["Affiliations"] ? requestObject["Affiliations"].slice(0, 59) : "",
+        "Udf/$NAME(Leads\\Showroom)": requestObject["Showroom"] ? requestObject["Showroom"].slice(0, 59) : "",
+        "Udf/$NAME(Leads\\MarketingChannel)": requestObject["MarketingChannel"] ? requestObject["MarketingChannel"].slice(0, 29) : "",
+        "Udf/$NAME(Leads\\Sales Person)": requestObject["SalesRep"] ? requestObject["SalesRep"].slice(0, 29) : "",
+        "Udf/$NAME(Leads\\SearchTerm)": requestObject["SearchTerm"] ? requestObject["SearchTerm"].slice(0, 59) : "Search Term",
+        "Udf/$NAME(Leads\\ProductURL)": requestObject["ProductURL"] ? requestObject["ProductURL"].slice(0, 100) : "",
+        "Udf/$NAME(Leads\\ProductID)": requestObject["ProductID"] ? requestObject["ProductID"].slice(0, 59) : "",
         "Lead": true
       }
     }
@@ -73,10 +72,6 @@ app.get('*', function (req, res) {
 })
 
 app.post('*', function (req, res) {
-  var salesRep = req.body["SalesRep"] || "No sales rep selected"
-  if(salesRep.length > 29) {
-    salesRep = "No sales rep selected"
-  }
   var authRequest = {"Database": "Tufenkian2007","UID": "ISAAC","Password": "verbalplusvisual2"}
   var requestObject = {
     "FirstName": req.body["FirstName"],
@@ -99,7 +94,7 @@ app.post('*', function (req, res) {
     "Affiliations": req.body["Affiliations"],
     "Showroom": req.body["Showroom"],
     "MarketingChannel": req.body["Website"],
-    "SalesRep": salesRep,
+    "SalesRep": req.body["SalesRep"],
     "SearchTerm": req.body["SearchTerm"],
     "ProductURL": req.body["ProductURL"],
     "ProductID": req.body["ProductID"]
