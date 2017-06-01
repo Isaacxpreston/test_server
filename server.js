@@ -4,7 +4,7 @@ var axios = require('axios')
 var app = express()
 var port = process.env.PORT || 3000
 
-var api_keys = require('./keys.js')
+var api_keys = process.env.MAILCHIMP //require('./keys.js')
 
 app.use(bodyParser.json())
 
