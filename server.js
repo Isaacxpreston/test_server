@@ -4,9 +4,12 @@ var axios = require('axios')
 var app = express()
 var port = process.env.PORT || 3000
 
+var api_keys = require('./keys.js')
+
 app.use(bodyParser.json())
 
 app.use(function(req, res, next) {
+
   res.header("Access-Control-Allow-Origin", "*");
   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
   next();
@@ -66,12 +69,7 @@ var addNewEntry = (token, context, requestObject) => {
   })
 }
 
-
-app.get('*', function (req, res) {
-  res.send('Server running on port ' + port)
-})
-
-app.post('*', function (req, res) {
+app.post('/maximizer', function (req, res) {
   var authRequest = {"Database": "Tufenkian2007","UID": "ISAAC","Password": "verbalplusvisual2"}
   var requestObject = {
     "FirstName": req.body["FirstName"],
@@ -114,6 +112,25 @@ app.post('*', function (req, res) {
     console.log("ERROR", err.data)
     res.send("server error")
   })
+})
+
+app.get('/mailchimp', function(req, res) {
+  //var list_id = "d7fa963c59"
+  var mailchimp_url = "https://us15.api.mailchimp.com/3.0/templates/39997" //just get a template
+  axios.get(mailchimp_url, {
+    headers: {'Authorization': api_keys.mailchimp_key}
+  })
+  .then(function(response, err) {
+    res.send(response.data)
+  })
+  .catch(function(err) {
+    console.log(err)
+    res.send('server error')
+  })
+})
+
+app.get('*', function (req, res) {
+  res.send('Server running on port ' + port)
 })
 
 app.listen(port, function () {
