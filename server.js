@@ -115,18 +115,18 @@ app.post('/maximizer', function (req, res) {
 })
 
 app.post('/mailchimp', function(req, res) {
-  var dummy_body = {
-    "email_address": "isaac06012017_5@verbalplusvisual.com",
-    "status": "subscribed",
-    "merge_fields": {
-        "FNAME": undefined,
-        "LNAME": undefined
-    }
-  }
+  // var dummy_body = {
+  //   "email_address": "isaac06012017_5@verbalplusvisual.com",
+  //   "status": "subscribed",
+  //   "merge_fields": {
+  //       "FNAME": undefined,
+  //       "LNAME": undefined
+  //   }
+  // }
   var config = { headers: {'Authorization': api_keys.mailchimp_key} }
   var list_id = "d7fa963c59"
   var mailchimp_url = "https://us15.api.mailchimp.com/3.0/lists/" + list_id + "/members/"
-  axios.post(mailchimp_url, dummy_body, config)
+  axios.post(mailchimp_url, req.body, config)
   .then(function(response, err) {
     res.send(response.data.status)
   })
