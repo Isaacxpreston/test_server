@@ -126,21 +126,19 @@ app.post('/mailchimp', function(req, res) {
   // }
   //var config = { headers: {'Authorization': api_keys.mailchimp_key} }
   console.log("received")
-  console.log(req.body)
   var config = { headers: {'Authorization': api_keys} }
   var list_id = "d7fa963c59"
   var mailchimp_url = "https://us15.api.mailchimp.com/3.0/lists/" + list_id + "/members/"
   axios.post(mailchimp_url, req.body, config)
   .then(function(response, err) {
-    console.log("response message again")
-    console.log(response.data.status.status)
-    res.send(response.data.status.status)
+    console.log("response message")
+    console.log(response.data.status)
+    res.send("done")
   })
   .catch(function(err) {
     console.log("error message")
     console.log(err.response.data.title)
-    var errmsg = err.response.data.title
-    res.send(errmsg)
+    res.send("done with error")
   })
 })
 
