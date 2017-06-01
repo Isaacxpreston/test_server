@@ -124,6 +124,7 @@ app.post('/mailchimp', function(req, res) {
   //   }
   // }
   //var config = { headers: {'Authorization': api_keys.mailchimp_key} }
+  console.log(req.body)
   var config = { headers: {'Authorization': api_keys} }
   var list_id = "d7fa963c59"
   var mailchimp_url = "https://us15.api.mailchimp.com/3.0/lists/" + list_id + "/members/"
