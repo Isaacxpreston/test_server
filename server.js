@@ -4,7 +4,8 @@ var axios = require('axios')
 var app = express()
 var port = process.env.PORT || 3000
 
-var api_keys = process.env.MAILCHIMP //require('./keys.js')
+// var api_keys =  require('./keys.js')
+var api_keys = process.env.MAILCHIMP
 
 app.use(bodyParser.json())
 
@@ -131,11 +132,11 @@ app.post('/mailchimp', function(req, res) {
   var mailchimp_url = "https://us15.api.mailchimp.com/3.0/lists/" + list_id + "/members/"
   axios.post(mailchimp_url, req.body, config)
   .then(function(response, err) {
-    console.log(response.data)
+    console.log(response)
     res.send(response.data.status)
   })
   .catch(function(err) {
-    console.log(err.response.data)
+    console.log(err.response)
     var errmsg = err.response.data.title
     res.send(errmsg)
   })
@@ -146,5 +147,6 @@ app.get('*', function (req, res) {
 })
 
 app.listen(port, function () {
+  console.log("live")
   console.log("running on " + port)
 })
