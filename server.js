@@ -132,11 +132,11 @@ app.post('/mailchimp', function(req, res) {
   var mailchimp_url = "https://us15.api.mailchimp.com/3.0/lists/" + list_id + "/members/"
   axios.post(mailchimp_url, req.body, config)
   .then(function(response, err) {
-    console.log(response)
+    console.log(response.data)
     res.send(response.data.status)
   })
   .catch(function(err) {
-    console.log(err.response)
+    console.log(err.response.data)
     var errmsg = err.response.data.title
     res.send(errmsg)
   })
