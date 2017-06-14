@@ -1,16 +1,16 @@
-var express = require('express')
-var bodyParser = require('body-parser')
-var axios = require('axios')
-var app = express()
-var port = process.env.PORT || 3000
+var express = require('express');
+var bodyParser = require('body-parser');
+var axios = require('axios');
+var app = express();
+var md5 = require('md5');
+var port = process.env.PORT || 3000;
 
-// var api_keys =  require('./keys.js')
+//  var api_keys =  require('./keys.js');
 var api_keys = process.env.MAILCHIMP
 
-app.use(bodyParser.json())
+app.use(bodyParser.json());
 
 app.use(function(req, res, next) {
-
   res.header("Access-Control-Allow-Origin", "*");
   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
   next();
@@ -115,30 +115,43 @@ app.post('/maximizer', function (req, res) {
   })
 })
 
+// app.post('/mailchimp', function(req, res) {
+//   console.log("received")
+//   //var config = { headers: {'Authorization': api_keys.mailchimp_key} }
+//   var config = { headers: {'Authorization': api_keys} }
+//   var list_id = "d7fa963c59"
+//   var mailchimp_url = "https://us15.api.mailchimp.com/3.0/lists/" + list_id + "/members/"
+//   axios.post(mailchimp_url, req.body, config)
+//   .then(function(response, err) {
+//     console.log("response message")
+//     console.log(response.data.status)
+//     res.send("done")
+//   })
+//   .catch(function(err) {
+//     console.log("error message")
+//     console.log(err.response.data.title)
+//     res.send("done with error")
+//   })
+// })
+
 app.post('/mailchimp', function(req, res) {
-  // var dummy_body = {
-  //   "email_address": "isaac06012017_5@verbalplusvisual.com",
-  //   "status": "subscribed",
-  //   "merge_fields": {
-  //       "FNAME": undefined,
-  //       "LNAME": undefined
-  //   }
-  // }
-  //var config = { headers: {'Authorization': api_keys.mailchimp_key} }
   console.log("received")
+  console.log(req.body['email_address'])
+  var md_email = md5(req.body['email_address'])
+  // var config = { headers: {'Authorization': api_keys.mailchimp_key} }
   var config = { headers: {'Authorization': api_keys} }
   var list_id = "d7fa963c59"
-  var mailchimp_url = "https://us15.api.mailchimp.com/3.0/lists/" + list_id + "/members/"
-  axios.post(mailchimp_url, req.body, config)
+  var mailchimp_url = "https://us15.api.mailchimp.com/3.0/lists/" + list_id + "/members/" + md_email
+  axios.put(mailchimp_url, req.body, config)
   .then(function(response, err) {
     console.log("response message")
     console.log(response.data.status)
-    res.send("done")
+    res.send("subscribed/updated")
   })
   .catch(function(err) {
     console.log("error message")
     console.log(err.response.data.title)
-    res.send("done with error")
+    res.send(err.response.data)
   })
 })
 
@@ -147,6 +160,5 @@ app.get('*', function (req, res) {
 })
 
 app.listen(port, function () {
-  console.log("live")
   console.log("running on " + port)
 })
