@@ -37,10 +37,8 @@ var addNewEntry = (token, context, requestObject) => {
           "City": requestObject["City"] ? requestObject["City"].slice(0, 79) : "",
           "StateProvince": requestObject["StateProvince"] ? requestObject["StateProvince"].slice(0, 79) : ""
         },
-        "Udf/$NAME(Leads\\GetNewsletter)": [
-          "2"
-        ],
-        "Udf/$NAME(Leads\\CallMe)": ["2"],
+        "Udf/$NAME(Leads\\GetNewsletter)": requestObject["Sub"], //["2"], //set to anything other than 2 for 'No'
+        "Udf/$NAME(Leads\\CallMe)": requestObject["Call"], //["2"],
         "Udf/$NAME(Leads\\Contact Invoicing)": requestObject["ContactInvoicing"] ? requestObject["ContactInvoicing"].slice(0, 29) : "",
         "Udf/$NAME(Leads\\Contact Receiving)": requestObject["ContactReceiving"] ? requestObject["ContactReceiving"].slice(0, 29) : "",
         "Udf/$NAME(Leads\\Instagram)": requestObject["SocialMedia"] ? requestObject["SocialMedia"].slice(0, 90) : "",
@@ -96,7 +94,9 @@ app.post('/maximizer', function (req, res) {
     "SalesRep": req.body["SalesRep"],
     "SearchTerm": req.body["SearchTerm"],
     "ProductURL": req.body["ProductURL"],
-    "ProductID": req.body["ProductID"]
+    "ProductID": req.body["ProductID"],
+    "Call": req.body["Call"],
+    "Sub": req.body["Sub"]
   }
   var auth_url = "http://74.95.35.226:6060/MaximizerWebData/Data.svc/json/Authenticate"
 
@@ -114,25 +114,6 @@ app.post('/maximizer', function (req, res) {
     res.send("server error")
   })
 })
-
-// app.post('/mailchimp', function(req, res) {
-//   console.log("received")
-//   //var config = { headers: {'Authorization': api_keys.mailchimp_key} }
-//   var config = { headers: {'Authorization': api_keys} }
-//   var list_id = "d7fa963c59"
-//   var mailchimp_url = "https://us15.api.mailchimp.com/3.0/lists/" + list_id + "/members/"
-//   axios.post(mailchimp_url, req.body, config)
-//   .then(function(response, err) {
-//     console.log("response message")
-//     console.log(response.data.status)
-//     res.send("done")
-//   })
-//   .catch(function(err) {
-//     console.log("error message")
-//     console.log(err.response.data.title)
-//     res.send("done with error")
-//   })
-// })
 
 app.post('/mailchimp', function(req, res) {
   console.log("received")
